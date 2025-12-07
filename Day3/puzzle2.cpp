@@ -22,12 +22,15 @@ int main() {
     unsigned long long totalJoltage = 0;
     while(getline(inputFile, line)){
         string joltage = "";
+        // have left and right to look at window
         int left_most_pos = 0;
         int right_most_pos = line.size() - 12;
+        // for each digit we just get the biggest number within that number's window
         while(joltage.size()!=12){
             char greatest_num = '0';
             int greatest_num_pos = -1;
             cout<<"For joltage size = "<<joltage.size()<<" looking at window: "<<right_most_pos<<" | "<<left_most_pos<<endl;
+            // look from right to left
             for(int i=right_most_pos; i>=left_most_pos; --i){
                 if(line[i]>=greatest_num){
                     greatest_num = line[i];
@@ -35,6 +38,7 @@ int main() {
                 }
             }
             cout<<"    greatest num found: "<<greatest_num<<" at position: "<<greatest_num_pos<<endl;
+            // change the window based on the number found
             joltage+=greatest_num;
             left_most_pos = greatest_num_pos+1;
             right_most_pos++;
